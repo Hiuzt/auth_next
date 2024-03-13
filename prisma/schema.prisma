@@ -1,0 +1,34 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model Users {
+    id        Int      @id @default(autoincrement())
+    createdAt DateTime @default(now())
+    email     String   @unique @db.VarChar(255)
+    firstname String   @db.VarChar(255)
+    lastname  String   @db.VarChar(255)
+    password  String   @db.VarChar(255)
+    documents Documents[]
+}
+
+model Documents {
+    id              Int                  @id @default(autoincrement()) @unique
+    owner           Users?              @relation(fields: [ownerId], references: [id])
+    ownerId         Int
+    createdAt       DateTime            @default(now())
+    documentAddons  Documentaddons[]
+}
+
+model Documentaddons {
+    id          Int         @id @default(autoincrement()) @unique
+    documents   Documents?  @relation(fields: [documentId], references: [id])
+    documentId  Int
+    
+
+}
