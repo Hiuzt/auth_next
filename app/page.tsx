@@ -35,7 +35,7 @@ export default function Home() {
                         <h1 className="text-4xl text-white [text-shadow:2px_2px_0px_rgb(0_0_0)]">Készítsd el te is a saját önéletrajzod</h1>
                         <h1 className="text-4xl text-white [text-shadow:2px_2px_0px_rgb(0_0_0)]">az <span className="text-primary">EasyCV</span> segítségével</h1>
 
-                        <Link href="#" className="bg-primary rounded-[20px] p-2 px-6 mt-6 text-white font-semibold">Önéletrajz készítés</Link>
+                        <Link href="/app/dashboard/" className="bg-primary rounded-[20px] p-2 px-6 mt-6 text-white font-semibold">Önéletrajz készítés</Link>
                     </div>
                 </div>
                 <div className="w-[50%] mx-auto grid grid-cols-3 h-1/3 items-center gap-12">
