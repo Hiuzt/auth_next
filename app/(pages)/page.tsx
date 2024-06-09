@@ -1,14 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import backgroundImage from "../public/bg_image1.jpg";
-import avatar1 from "../public/user-1.jpg";
+import backgroundImage from "@/public/bg_image1.jpg";
+import avatar1 from "@/public/user-1.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWandMagicSparkles, faPalette, faLayerGroup, faStar } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"
-import { useSession } from "next-auth/react";
 
 export default function Home() {
     const informationTable: any = [

@@ -57,7 +57,7 @@ export default function Page() {
 
 
                     <div className="col-span-1 col-start-2 bg-primary text-white rounded-[20px] overflow-hidden pl-6 p-2 flex items-center border-2 border-[#323644] transition focus-within:border-primary">
-                        <input  type="submit" value={"Regisztráció"} />
+                        <input  type="submit" value={"Bejelentkezés"} />
                         <FontAwesomeIcon className="ml-auto mr-4 w-4 h-4" icon={faRightToBracket} />
                     </div>
                 </form>
