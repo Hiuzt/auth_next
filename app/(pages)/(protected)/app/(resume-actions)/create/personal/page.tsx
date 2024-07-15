@@ -26,8 +26,6 @@ export default function Page() {
         if (status === "unauthenticated") {
             router.push('/auth/login', { scroll: false })
         }
-        console.log(data)
-        
     }, [status, router])
 
     const [addedFields, setAddedFields] = useState<any>({
@@ -60,7 +58,6 @@ export default function Page() {
     }, [formInputs, data])
 
     const handleNextStep = () => {
-        
         router.push("experience")
     }
 

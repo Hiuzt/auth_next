@@ -35,10 +35,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <CreateProvider>
             <section  className="z-0">
-                <header className="w-full sticky left-0 z-50 top-0 bg-white/40 backdrop-blur-sm border-b border-black/40 h-[8vh] p-4 flex items-center justify-between">
-                    <Link href={"/app/dashboard"}  className="text-black/60 bg-inherit rounded-[20px] border border-black/30 p-2 px-4 font-bold hover:bg-black/10 transition"><FontAwesomeIcon icon={faChevronLeft} /> Önéletrajzok</Link>
-                    <input ref={inputRef} value={inputText} onChange={changeText} type="text" placeholder="Név" className="w-8 bg-black/0 hover:border-b focus:border-b hover:border-black/30 focus:border-primary outline-none" />
-                    <button className="bg-primary rounded-[20px] p-2 px-4 font-bold text-white">Mentés</button>
+                <header className="w-full sticky left-0 z-50 top-0 bg-white/40 backdrop-blur-sm border-b border-black/40 h-[8vh] p-4 grid grid-cols-12 items-center justify-between">
+                    <Link href={"/app/dashboard"}  className="col-span-1 text-black/60 bg-inherit rounded-[20px] border border-black/30 p-2 px-4 font-bold hover:bg-black/10 transition"><FontAwesomeIcon icon={faChevronLeft} /> Önéletrajzok</Link>
+                    <div className="flex justify-center col-span-10">
+                        <input ref={inputRef} value={inputText} onChange={changeText} type="text" placeholder="Név" className="col-span-10 flex items-center justify-center w-8 bg-black/0 hover:border-b focus:border-b hover:border-black/30 focus:border-primary outline-none" />
+                    </div> 
+                    <button className="bg-primary rounded-[20px] p-2 px-4 font-bold text-white col-span-1">Mentés</button>
                 </header>
                 {children}
             </section>

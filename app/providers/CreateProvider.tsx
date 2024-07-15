@@ -40,9 +40,9 @@ export default function CreateProvider ({children}: {children: React.ReactNode})
         },
         experienceData: {
             desciption: "",
-            workExperience: {},
-            skills: {},
-            languages: {},
+            workExperience: [],
+            skills: [],
+            languages: [],
         },
         selectedTheme: 1,
     })
