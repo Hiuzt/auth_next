@@ -55,7 +55,7 @@ export default function Page() {
                     </div>
                     <div className="flex flex-col">
 
-                        <WorkexperienceList />
+                        <WorkexperienceList formInputs={formInputs} setInputValue={setInputValue} />
                     </div>
                     <div className="flex flex-col">
                         <SkillsList skills={formInputs?.experienceData?.skills} formInputs={formInputs} setInputValue={setInputValue} />

@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 
 interface TextInputProps {
     inputName: string;
     inputID: string;
     placeHolder: string;
     inputValue: string;
-    changeValue: (e: any) => void;
+    changeValue: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const TextInput: React.FC<TextInputProps> = ({inputName, inputID, placeHolder, inputValue, changeValue}) => {
