@@ -23,6 +23,7 @@ export function useCreateContext() {
     return useContext(CreateContext);
 }
 
+
 export default function CreateProvider ({children}: {children: React.ReactNode}) {
     const [data, setData] = useState<any>({
         personalData: {
