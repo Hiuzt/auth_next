@@ -1,11 +1,25 @@
+"use client"
 import { faAddressBook, faCircle, faEnvelope, faMarker, faPhone } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
-import User from "@/public/usrbg.jpg"
-import Image from 'next/image'
+import React, { useRef } from 'react'
+import html2canvas from 'html2canvas';
 
 
 const CurriculumVitae1: React.FC<any> = ({ }) => {
+    const cvRef = useRef<any>();
+
+    const handleCapture = async () => {
+        const cvElement = cvRef.current;
+        const canvas = await html2canvas(cvElement)
+        const dataURL = canvas.toDataURL('image/png');
+
+        const link = document.createElement('a');
+        link.href = dataURL;
+        link.download = 'capture.png';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
 
     const data = {
         personalData: {
@@ -48,7 +62,7 @@ const CurriculumVitae1: React.FC<any> = ({ }) => {
 
     return (
         //Container
-        <div className="m-0 p-0 grid-cols-2">
+        <div onClick={handleCapture} ref={cvRef} className="m-0 p-0 grid-cols-2">
             {/* Header */}
             {/* ${colorList[currentColor]} */}
             <header className="bg-[#36383E]">
@@ -189,7 +203,7 @@ const CurriculumVitae1: React.FC<any> = ({ }) => {
                     </div>
                     <h1 className="border-b text-primary font-bold mt-4 text-2xl">Készségek</h1>
                     <div className="grid grid-cols-2 mt-4 text-[#36383E]">
-                        <div className="flex justify-between items-center mr-16">
+                        <div className="flex justify-between items-center">
                             <span>C#</span>
                             <span className="text-black text-lg flex gap-2">
                                 <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
@@ -199,7 +213,7 @@ const CurriculumVitae1: React.FC<any> = ({ }) => {
                                 <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
                             </span>
                         </div>
-                        <div className="flex justify-between items-center mr-16">
+                        <div className="flex justify-between items-center">
                             <span>Javascript</span>
                             <span className="text-black text-lg flex gap-2">
                                 <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
@@ -209,7 +223,7 @@ const CurriculumVitae1: React.FC<any> = ({ }) => {
                                 <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
                             </span>
                         </div>
-                        <div className="flex justify-between items-center mr-16">
+                        <div className="flex justify-between items-center">
                             <span>Umbraco</span>
                             <span className="text-black text-lg flex gap-2">
                                 <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
@@ -219,7 +233,7 @@ const CurriculumVitae1: React.FC<any> = ({ }) => {
                                 <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
                             </span>
                         </div>
-                        <div className="flex justify-between items-center mr-16">
+                        <div className="flex justify-between items-center">
                             <span>Typescript</span>
                             <span className="text-black text-lg flex gap-2">
                                 <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
@@ -229,7 +243,7 @@ const CurriculumVitae1: React.FC<any> = ({ }) => {
                                 <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
                             </span>
                         </div>
-                        <div className="flex justify-between items-center mr-16">
+                        <div className="flex justify-between items-center">
                             <span>React</span>
                             <span className="text-black text-lg flex gap-2">
                                 <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
@@ -239,7 +253,7 @@ const CurriculumVitae1: React.FC<any> = ({ }) => {
                                 <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
                             </span>
                         </div>
-                        <div className="flex justify-between items-center mr-16">
+                        <div className="flex justify-between items-center">
                             <span>Vue</span>
                             <span className="text-black text-lg flex gap-2">
                                 <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />

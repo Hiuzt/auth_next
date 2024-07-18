@@ -45,7 +45,7 @@ export default function Page() {
     return (
         <div className="flex flex-col w-1/2 mx-auto">
             <div className="mx-auto w-full">
-                <div className="text-xl font-semibold px-32 mt-6 text-gray-700 ">Személyes adatok</div>
+                <div className="text-xl font-semibold px-32 mt-6 text-gray-700 ">Tapasztalatok</div>
                 <div className="px-32 py-4 flex flex-col gap-8">
 
 

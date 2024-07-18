@@ -3,11 +3,11 @@
 import { useSession } from "next-auth/react"
 import { redirect } from "next/dist/server/api-utils"
 import { useRouter } from "next/navigation"
-import { FormEvent, FormEventHandler, useContext, useEffect, useState } from "react"
+import { ChangeEvent, FormEvent, FormEventHandler, useContext, useEffect, useRef, useState } from "react"
 import User from "@/public/user_big.jpg"
-import Image from "next/image"
+import Image, { StaticImageData } from "next/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus } from "@fortawesome/free-solid-svg-icons"
+import { faCamera, faPhotoFilm, faPlus } from "@fortawesome/free-solid-svg-icons"
 import { useDispatch, useSelector } from "react-redux"
 import { useCreateContext } from "@/app/providers/CreateProvider"
 
@@ -50,7 +50,7 @@ export default function Page() {
                 ...formInputs["personalData"],
                 [inputName]: inputValue
             }
-        })    
+        })
     }
 
     useEffect(() => {
@@ -59,6 +59,27 @@ export default function Page() {
 
     const handleNextStep = () => {
         router.push("experience")
+    }
+
+    const profileImageRef = useRef<HTMLImageElement>(null);
+    const inputFileRef = useRef<HTMLInputElement>(null);
+
+    const changeImage = (e: ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        if (inputFileRef.current?.files && inputFileRef.current?.files.length > 0) {
+            const imageSrc = URL.createObjectURL(inputFileRef.current.files[0]);
+            if (profileImageRef.current) {
+                setInputValue({
+                    ...formInputs,
+                    ["personalData"]: {
+                        ...formInputs["personalData"],
+                        ["image"]: imageSrc,
+                        ["imageFile"]: inputFileRef.current.files[0]
+                    }
+                })
+            }
+
+        }
     }
 
 
@@ -70,8 +91,12 @@ export default function Page() {
                     <div className="flex gap-4">
                         <div className="flex flex-col justify-between">
                             <label htmlFor="image" className="text-xs font-semibold">Fénykép</label>
-                            <div className="bg-gray-100 aspect-square w-32 rounded-lg overflow-hidden">
-                                <Image className="w-full" src={User} alt="" />
+                            <div className="bg-gray-100 aspect-square w-32 rounded-lg overflow-hidden relative">
+                                <Image ref={profileImageRef} className="w-full cursor-pointer peer" src={formInputs["personalData"]?.image} width={128} height={128} alt="" />
+                                <label htmlFor="image" className="bg-black/30 backdrop-blur-sm hidden hover:flex peer-hover:flex items-center cursor-pointer  absolute left-0 top-0 w-full h-full">
+                                    <FontAwesomeIcon icon={faCamera} className="m-auto text-center text-white w-8 h-8" />
+                                </label>
+                                <input ref={inputFileRef} onChange={(e) => changeImage(e)} id="image" type="file" className="hidden" />
                             </div>
                         </div>
 
@@ -116,7 +141,7 @@ export default function Page() {
                     </div>
                     {Object.keys(addedFields).map((fieldName: any) => (
                         <div key={fieldName} className={`flex flex-col-reverse ${addedFields[fieldName][0] === false && ("hidden")}`}>
-                            <input  id={fieldName} type="text" className="bg-gray-100 rounded-lg p-2 peer focus:bg-primary/20 focus:border-primary outline-none focus:border-[1px] border transition" placeholder={addedFields[fieldName][1]} />
+                            <input id={fieldName} type="text" className="bg-gray-100 rounded-lg p-2 peer focus:bg-primary/20 focus:border-primary outline-none focus:border-[1px] border transition" placeholder={addedFields[fieldName][1]} />
                             <label htmlFor={fieldName} className="text-xs font-semibold text-gray-700 peer-focus:text-primary">{addedFields[fieldName][1]}</label>
                         </div>
                     ))}
