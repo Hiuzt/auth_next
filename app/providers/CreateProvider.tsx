@@ -1,6 +1,7 @@
 "use client"
 
 import {createContext, useContext, useState} from "react";
+import User from "@/public/nopicture.png"
 
 const CreateContext = createContext<DataContextType |undefined>(undefined);
 
@@ -27,7 +28,7 @@ export function useCreateContext() {
 export default function CreateProvider ({children}: {children: React.ReactNode}) {
     const [data, setData] = useState<any>({
         personalData: {
-            image: "",
+            image: User,
             imageFile: "",
             firstName: "",
             lastName: "",

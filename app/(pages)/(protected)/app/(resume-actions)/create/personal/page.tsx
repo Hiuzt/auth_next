@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react"
 import { redirect } from "next/dist/server/api-utils"
 import { useRouter } from "next/navigation"
 import { ChangeEvent, FormEvent, FormEventHandler, useContext, useEffect, useRef, useState } from "react"
-import User from "@/public/user_big.jpg"
+import User from "@/public/nopicture.png"
 import Image, { StaticImageData } from "next/image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCamera, faPhotoFilm, faPlus } from "@fortawesome/free-solid-svg-icons"
@@ -21,12 +21,12 @@ export default function Page() {
 
     const data = useCreateContext()
     const [formInputs, setInputValue] = useState<any>(data?.data);
-    
+
     useEffect(() => {
         if (status === "unauthenticated") {
             router.push('/auth/login', { scroll: false })
         }
-    }, [status, router])
+    }, [status, router, formInputs])
 
     const [addedFields, setAddedFields] = useState<any>({
         "birthdate": [false, "Születési idő"],
@@ -96,7 +96,7 @@ export default function Page() {
                                 <label htmlFor="image" className="bg-black/30 backdrop-blur-sm hidden hover:flex peer-hover:flex items-center cursor-pointer  absolute left-0 top-0 w-full h-full">
                                     <FontAwesomeIcon icon={faCamera} className="m-auto text-center text-white w-8 h-8" />
                                 </label>
-                                <input ref={inputFileRef} onChange={(e) => changeImage(e)} id="image" type="file" className="hidden" />
+                                <input accept="image/*" ref={inputFileRef} onChange={(e) => changeImage(e)} id="image" type="file" className="hidden" />
                             </div>
                         </div>
 
