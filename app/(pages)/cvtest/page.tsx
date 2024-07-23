@@ -1,5 +1,6 @@
 import React from 'react'
-import CurriculumVitae1 from '../../components/templates/CurriculumVitae1'
+import CurriculumVitae2 from '@/app/components/templates/CurriculumVitae2'
+import CurriculumVitae1 from '@/app/components/templates/CurriculumVitae1'
 
 const page = () => {
   return (

@@ -3,6 +3,9 @@ import { faAddressBook, faCircle, faEnvelope, faMarker, faPhone } from '@fortawe
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useRef } from 'react'
 import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+
+
 
 
 const CurriculumVitae1: React.FC<any> = ({ }) => {
@@ -10,15 +13,19 @@ const CurriculumVitae1: React.FC<any> = ({ }) => {
 
     const handleCapture = async () => {
         const cvElement = cvRef.current;
-        const canvas = await html2canvas(cvElement)
-        const dataURL = canvas.toDataURL('image/png');
 
-        const link = document.createElement('a');
-        link.href = dataURL;
-        link.download = 'capture.png';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        // const canvas = await html2canvas(cvElement)
+        // const dataURL = canvas.toDataURL('image/png');
+        // const pdf = new jsPDF();
+        // pdf.addImage(dataURL, 'Canvas', 0, 0)
+        // pdf.save("download.pdf")
+
+        // const link = document.createElement('a');
+        // link.href = dataURL;
+        // link.download = 'capture.png';
+        // document.body.appendChild(link);
+        // link.click();
+        // document.body.removeChild(link);
     }
 
     const data = {
@@ -41,13 +48,25 @@ const CurriculumVitae1: React.FC<any> = ({ }) => {
             workExperience: [
                 ["Deutsche Telekom IT Solutions kft", "Trainee", "Pécs", "2019", "2023", 0, "Dolgoztam itt isasdas dasid ohasuiod hasiduhasiduhasdiuhsiudhasiudhasiudh hasiduhasiduhasdiuhsiudhasiudhasiudh hasiduhasiduhasdiuhsiudhasiudhasiudh hasiduhasiduhasdiuhsiudhasiudhasiudh hasiduhasiduhasdiuhsiudhasiudhasiudh kicsit ja"],
                 ["InfoCompass Core kft.", "Software developer", "Pécs", "2024", "2024", 0, "Dolgoztam itt isasdas dasid ohasuiod hasiduhasiduhasdiuhsiudhasiudhasiudh hasiduhasiduhasdiuhsiudhasiudhasiudh hasiduhasiduhasdiuhsiudhasiudhasiudh hasiduhasiduhasdiuhsiudhasiudhasiudh hasiduhasiduhasdiuhsiudhasiudhasiudh kicsit ja"],
-                
+
             ],
-            skills: [],
-            languages: [],
+            skills: [
+                ["C#", 3],
+                ["Javascript", 3],
+                ["Umbraco", 3],
+                ["Typescript", 3],
+                ["React", 3],
+                ["Vue", 5],
+            ],
+            languages: [
+                ["Magyar", 6],
+                ["Angol", 4],
+                ["Német", 2]
+            ],
             schools: [
                 ["Pécsi Tudomány Egyetem", "Mérnökinformatikus", "BSC", "2019", "2023"],
                 ["Pécsi Tudomány Egyetem", "Mérnökinformatikus", "BSC", "2019", "2023"],
+
             ]
         },
         selectedTheme: 1,
@@ -77,7 +96,7 @@ const CurriculumVitae1: React.FC<any> = ({ }) => {
                         {data?.personalData?.position}
                     </p>
                     <p>
-                    {/* <Image src={User} alt='' className=" rounded-full z-10  w-32 absolute" /> */}
+                        {/* <Image src={User} alt='' className=" rounded-full z-10  w-32 absolute" /> */}
                     </p>
                 </div>
             </header>
@@ -132,33 +151,23 @@ const CurriculumVitae1: React.FC<any> = ({ }) => {
                     </div>
                     <div className="border-b border-[#36383E] py-6 mx-4">
                         <li className="text-center font-semibold">Nyelvek</li>
-                        <li className="mt-4 flex justify-between gap-2 items-center text-white">
-                            Angol
-                            <div className="flex gap-2">
+                        {data?.experienceData?.languages.map((languageValue, languageIndex) => (
+                            <li key={languageIndex} className="mt-4 flex justify-between gap-2 items-center text-white">
+                                {languageValue[0]}
+                                <div className="flex gap-2">
+                                    {Array.from(Array(6), (_, currentIndex) => (
+                                        <>
+                                            <FontAwesomeIcon className={`${Number(languageValue[1]) > currentIndex ? 'text-white' : 'text-white/30'} w-2 h-2`} icon={faCircle} />
+                                        </>
+                                    ))}
 
-                                <FontAwesomeIcon className="w-2 text-white" icon={faCircle} />
-                                <FontAwesomeIcon className="w-2 text-white" icon={faCircle} />
-                                <FontAwesomeIcon className="w-2 text-white" icon={faCircle} />
-                                <FontAwesomeIcon className="w-2 text-white" icon={faCircle} />
-                                <FontAwesomeIcon className="w-2 text-white/30" icon={faCircle} />
-                                <FontAwesomeIcon className="w-2 text-white/30" icon={faCircle} />
-                            </div>
-                        </li>
-                        <li className="mt-4 flex justify-between gap-2 items-center text-white">
-                            Német
-                            <div className="flex gap-2">
 
-                                <FontAwesomeIcon className="w-2 text-white" icon={faCircle} />
-                                <FontAwesomeIcon className="w-2 text-white" icon={faCircle} />
-                                <FontAwesomeIcon className="w-2 text-white" icon={faCircle} />
-                                <FontAwesomeIcon className="w-2 text-white/30" icon={faCircle} />
-                                <FontAwesomeIcon className="w-2 text-white/30" icon={faCircle} />
-                                <FontAwesomeIcon className="w-2 text-white/30" icon={faCircle} />
-                            </div>
-                        </li>
+                                </div>
+                            </li>
+                        ))}
                     </div>
                     <div className="border-b border-[#36383E] py-6 mx-4">
-                    <li className="text-center font-semibold">Egyéb</li>
+                        <li className="text-center font-semibold">Egyéb</li>
                         <li className="mt-4 flex gap-2 items-center text-white justify-between">
                             <p className="text-sm">
                                 Jogosítvány
@@ -199,70 +208,23 @@ const CurriculumVitae1: React.FC<any> = ({ }) => {
                                 <h3 className="font-semibold text-sm text-black/50">{workValue[1]}</h3>
                                 <p className="text-[#36383E] text-sm leading-6">{workValue[6]}</p>
                             </div>
-                        ))}           
+                        ))}
                     </div>
                     <h1 className="border-b text-primary font-bold mt-4 text-2xl">Készségek</h1>
-                    <div className="grid grid-cols-2 mt-4 text-[#36383E]">
-                        <div className="flex justify-between items-center">
-                            <span>C#</span>
-                            <span className="text-black text-lg flex gap-2">
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
-                            </span>
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <span>Javascript</span>
-                            <span className="text-black text-lg flex gap-2">
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
-                            </span>
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <span>Umbraco</span>
-                            <span className="text-black text-lg flex gap-2">
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
-                            </span>
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <span>Typescript</span>
-                            <span className="text-black text-lg flex gap-2">
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
-                            </span>
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <span>React</span>
-                            <span className="text-black text-lg flex gap-2">
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
-                            </span>
-                        </div>
-                        <div className="flex justify-between items-center">
-                            <span>Vue</span>
-                            <span className="text-black text-lg flex gap-2">
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
-                                <FontAwesomeIcon className="text-primary/30 w-2 h-2" icon={faCircle} />
-                            </span>
-                        </div>
+                    <div className="grid grid-cols-2 mt-4  gap-x-4 text-[#36383E]">
+                        {data?.experienceData?.skills.map((skillValue, skillIndex) => (
+                            <div key={skillIndex} className="flex justify-between items-center">
+                                <span>{skillValue[0]}</span>
+                                <span className="text-black text-lg flex gap-2">
+                                    {Array.from(Array(5), (_, currentIndex) => (
+                                        <>
+                                            <FontAwesomeIcon className={`${Number(skillValue[1]) > currentIndex ? 'text-primary' : 'text-primary/30'} w-2 h-2`} icon={faCircle} />
+                                        </>
+                                    ))}
+
+                                </span>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
